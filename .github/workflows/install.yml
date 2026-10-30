@@ -12,6 +12,9 @@ permissions:
 jobs:
   install:
     runs-on: macos-26
+    env:
+      # livecheck asks GitHub's API for the latest release; without a token, a shared runner's address is soon over the limit.
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Homebrew
         run: brew --version
