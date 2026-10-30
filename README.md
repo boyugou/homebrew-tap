@@ -10,7 +10,7 @@ brew install boyugou/tap/rh                   # only the rh command-line tool, b
 
 Then open Right Here and press **Set Up**, or run `rh setup`.
 
-The files here are copies. Their source is [`packaging/homebrew`](https://github.com/boyugou/right-here/tree/main/packaging/homebrew)
+The cask and the formula here are copies. Their source is [`packaging/homebrew`](https://github.com/boyugou/right-here/tree/main/packaging/homebrew)
 in the main repository, and each release copies them here. Report problems there.
 
 Licensed under the Apache License 2.0, as Right Here is.
