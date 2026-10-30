@@ -39,3 +39,12 @@ jobs:
           brew style boyugou/tap
           brew audit boyugou/tap/rh
           brew audit --cask boyugou/tap/right-here
+          brew livecheck boyugou/tap/rh
+          brew livecheck --cask boyugou/tap/right-here
+
+      # What homebrew/cask and homebrew/core would also ask of a new package (notability among it). It informs; it does not fail the run.
+      - name: The audit of a new package
+        continue-on-error: true
+        run: |
+          brew audit --new --cask boyugou/tap/right-here
+          brew audit --new boyugou/tap/rh
