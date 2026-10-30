@@ -1,0 +1,41 @@
+name: Install
+
+# Installs the cask and the formula from this tap the way a person does, after every push to main (each release pushes one) and on demand.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    runs-on: macos-26
+    steps:
+      - name: Homebrew
+        run: brew --version
+
+      - name: The formula, built from source
+        run: |
+          brew install boyugou/tap/rh
+          brew test boyugou/tap/rh
+          rh --version
+          man -w rh
+          test -f "$(brew --prefix)/share/zsh/site-functions/_rh"
+          test -f "$(brew --prefix)/etc/bash_completion.d/rh"
+          test -f "$(brew --prefix)/share/fish/vendor_completions.d/rh.fish"
+          brew uninstall rh
+
+      - name: The cask
+        run: |
+          brew install --cask boyugou/tap/right-here
+          rh --version
+          spctl --assess --type execute -vv "/Applications/Right Here.app"
+          brew uninstall --cask right-here
+
+      - name: Style and audit
+        run: |
+          brew style boyugou/tap
+          brew audit boyugou/tap/rh
+          brew audit --cask boyugou/tap/right-here
