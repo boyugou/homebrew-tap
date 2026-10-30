@@ -8,6 +8,9 @@ brew install --cask boyugou/tap/right-here    # the app: the Finder menu, the se
 brew install boyugou/tap/rh                   # only the rh command-line tool, built from source (needs Xcode 26)
 ```
 
+Install one of the two: the app already puts its `rh` in Homebrew's `bin`. With the formula installed first, the cask leaves
+the formula's `rh` in place; the other way round, the formula cannot link its `rh`.
+
 Then open Right Here and press **Set Up**, or run `rh setup`.
 
 The cask and the formula here are copies. Their source is [`packaging/homebrew`](https://github.com/boyugou/right-here/tree/main/packaging/homebrew)
