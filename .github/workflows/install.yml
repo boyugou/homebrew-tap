@@ -49,5 +49,7 @@ jobs:
       - name: The audit of a new package
         continue-on-error: true
         run: |
-          brew audit --new --cask boyugou/tap/right-here
-          brew audit --new boyugou/tap/rh
+          status=0
+          brew audit --new --cask boyugou/tap/right-here || status=1
+          brew audit --new boyugou/tap/rh || status=1
+          exit "$status"
