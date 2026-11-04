@@ -39,6 +39,8 @@ jobs:
 
       - name: Style and audit
         run: |
+          # Installing a package trusts only it; reading the whole tap, as style and audit do, needs the tap trusted (Homebrew 7).
+          brew trust --tap boyugou/tap
           brew style boyugou/tap
           brew audit boyugou/tap/rh
           brew audit --cask boyugou/tap/right-here
