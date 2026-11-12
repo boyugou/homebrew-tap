@@ -35,10 +35,6 @@ jobs:
           brew install --cask boyugou/tap/right-here
           rh --version
           spctl --assess --type execute -vv "/Applications/Right Here.app"
-          # Whether the postflight could register the Finder extension, and whether pluginkit can at all on this runner (it is told, not checked yet).
-          echo "after brew: $(pluginkit -m -i com.boyugou.righthere.FinderExtension)"
-          pluginkit -a "/Applications/Right Here.app/Contents/PlugIns/FinderExtension.appex" && echo "direct add: ok" || echo "direct add: failed"
-          echo "after a direct add: $(pluginkit -m -i com.boyugou.righthere.FinderExtension)"
           brew uninstall --cask right-here
 
       - name: Style and audit
