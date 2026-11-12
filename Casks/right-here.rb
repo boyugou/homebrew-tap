@@ -3,8 +3,8 @@
 # Homebrew cask for the app (Finder extension, rh inside). The source of Casks/right-here.rb in the tap
 # boyugou/homebrew-tap: script/publish_release.sh fills the version and the DMG's checksum and copies the file there.
 cask "right-here" do
-  version "1.2.9"
-  sha256 "77864b77c91de55b7c8cc203f2a57b8fac9cad33a80747b8eece19352db4637f"
+  version "1.2.10"
+  sha256 "38e4e648e849d5e760b468241e0340ac625cdf233b00d6e83f4dfab934b0771c"
 
   url "https://github.com/boyugou/right-here/releases/download/v#{version}/Right-Here-#{version}.dmg"
   name "Right Here"
@@ -21,6 +21,12 @@ cask "right-here" do
 
   app "Right Here.app"
   binary "#{appdir}/Right Here.app/Contents/Helpers/rh"
+
+  # Replacing the app (an upgrade) removes the Finder extension's registration, and the Finder menu is gone until something registers it again (measured on
+  # macOS 27.2). `-a` alone keeps the person's choice to use it or not.
+  postflight do
+    system_command "/usr/bin/pluginkit", args: ["-a", "#{appdir}/Right Here.app/Contents/PlugIns/FinderExtension.appex"]
+  end
 
   zap trash: [
     "~/.config/right-here",
