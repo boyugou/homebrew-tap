@@ -35,6 +35,8 @@ jobs:
           brew install --cask boyugou/tap/right-here
           rh --version
           spctl --assess --type execute -vv "/Applications/Right Here.app"
+          # The cask's postflight registers the Finder extension (replacing the app unregisters it): pluginkit lists it.
+          pluginkit -m -i com.boyugou.righthere.FinderExtension | grep -q FinderExtension
           brew uninstall --cask right-here
 
       - name: Style and audit
